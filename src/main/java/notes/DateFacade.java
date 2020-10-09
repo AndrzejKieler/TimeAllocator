@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class DateFacade {
-    public static DateFacade dateFacade = new DateFacade();
+    private static DateFacade dateFacade;
     Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Poland"));
     private byte[] weekDaysList =
                     {(byte)0b01000000,
@@ -21,9 +21,12 @@ public class DateFacade {
 
     }
 
+    public static DateFacade getInstance() {
+        if(dateFacade == null) dateFacade = new DateFacade();
+        return dateFacade;
+    }
     public byte nullWeekDays(Date date) {
         byte weekDays = (byte) 0b0100_0000;
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Poland"));
         calendar.setTime(date);
         int weekDayNum = calendar.get(Calendar.DAY_OF_WEEK)-2;
         if(weekDayNum == -1) weekDayNum = 6;
@@ -32,18 +35,17 @@ public class DateFacade {
     }
 
     public ArrayList<Integer> weekDaysParser(byte weekDays) {
-        int dayNum=1;
+        int dayNum;
         ArrayList<Integer> weekDayList = new ArrayList<>();
-        for (dayNum, dayNum<8, dayNum++) {
+        for (dayNum=1; dayNum<8; dayNum++) {
             if((weekDaysList[dayNum-1]&weekDays)>0)weekDayList.add(Integer.valueOf(dayNum));
         }
+        return weekDayList;
     }
 
-
-
-    public Date addToDate(Date date, int typeOfRepetition, int repetitionOffset) {
+    public Date addToDate(Date date, int typeOfRepetition, int offset) {
         calendar.setTime(date);
-        calendar.add(typeOfRepetition,repetitionOffset);
+        calendar.add(typeOfRepetition,offset);
         return calendar.getTime();
     }
 

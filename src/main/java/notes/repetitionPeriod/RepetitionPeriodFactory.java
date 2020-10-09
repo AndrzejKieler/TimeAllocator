@@ -1,5 +1,6 @@
 package notes.repetitionPeriod;
 
+import notes.DateFacade;
 import notes.repetitionPeriod.repetitionPeriodTypeFactory.AnnualPeriodFactory;
 import notes.repetitionPeriod.repetitionPeriodTypeFactory.MonthlyByNumberPeriodFactory;
 import notes.repetitionPeriod.repetitionPeriodTypeFactory.MonthlyByWeekdayPeriodFactory;
@@ -10,7 +11,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import static notes.DateFacade.dateFacade;
 
 public abstract class RepetitionPeriodFactory {
 
@@ -26,11 +26,11 @@ public abstract class RepetitionPeriodFactory {
         if (args[4] != null) {
             weekDays = (byte) args[4];
         } else if(periodType != RepetitionPeriodEnum.DAILY_REPEATED){
-            dateFacade.nullWeekDays(date);
-            }
-            else {
-                return buildDaily(date, repetitionOffset, finishDate);
-            }
+            weekDays = DateFacade.getInstance().nullWeekDays(date);
+        }
+        else {
+            return buildDaily(date, repetitionOffset, finishDate);
+        }
 
         return periodTypeFactory(periodType).build(date,repetitionOffset, finishDate, weekDays);
     }
@@ -38,17 +38,16 @@ public abstract class RepetitionPeriodFactory {
     final RepetitionPeriod buildDaily(Date startDate, int repetitionOffset,Date finishDate){
         ArrayList<Date> repetitionDates = new ArrayList<>();
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Poland"));
-        Date date = startDate;
 
-        calendar.setTime(date);
+        calendar.setTime(startDate);
         calendar.add(Calendar.YEAR,1);
         Date yearAddedDate = calendar.getTime();
-        calendar.setTime(date);
+        calendar.setTime(startDate);
 
-        while(date.before(yearAddedDate)){
+        while(startDate.before(yearAddedDate)){
             repetitionDates.add(calendar.getTime());
             calendar.add(Calendar.DATE,repetitionOffset);
-            if(finishDate!=null && date.before(finishDate)) break;
+            if(finishDate!=null && startDate.before(finishDate)) break;
         }
         if(finishDate!=null) return new RepetitionPeriod(startDate,repetitionDates,finishDate);
         else return new RepetitionPeriod(startDate,repetitionDates);
