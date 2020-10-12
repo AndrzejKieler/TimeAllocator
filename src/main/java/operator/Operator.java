@@ -1,10 +1,15 @@
 package operator;
 
-import notes.Note;
-import notes.events_or_deadlines.Event_or_Deadline;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Operator {
     public static void main(String[] args){
-        System.out.println("Hejj");
+        System.out.println("Kel");
+
+
+        Logger logger = LoggerFactory.getLogger(Operator.class);
+        logger.info("HelloWorld");
     }
 }
