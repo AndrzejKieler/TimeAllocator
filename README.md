@@ -7,8 +7,8 @@
 * [Setup](#setup)
 
 ## General info
-App for storing notes like tasks, project, events or deadlines for specified date with various extra information, like priority, custom labels, repetition period etc.
-For the snapshot version notes are serialised to flat file, but it future it will be connected to database using Hybernate framework.
+App for storing domain like tasks, project, events or deadlines for specified date with various extra information, like priority, custom labels, repetition period etc.
+For the snapshot version domain are serialised to flat file, but it future it will be connected to database using Hybernate framework.
 	
 ## Technologies
 Project is created with:

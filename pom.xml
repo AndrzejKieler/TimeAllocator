@@ -25,12 +25,14 @@
             <version>16.0.1</version>
             <scope>compile</scope>
         </dependency>
+        <!-- LOMBOK -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
+        <!-- LOGGING -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -41,11 +43,13 @@
             <artifactId>slf4j-simple </artifactId>
             <version>1.7.30</version>
         </dependency>
+        <!-- SERVLETS -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <!-- SERVLET CONTAINER -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-plus</artifactId>
@@ -55,6 +59,18 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-annotations</artifactId>
             <version>${jetty.version}</version>
+        </dependency>
+        <!-- DB -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+        </dependency>
+        <!-- ORM -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-orm</artifactId>
+            <version>5.11.5.Final</version>
         </dependency>
 
     </dependencies>
@@ -68,7 +84,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.github.AndrzejKieler.Operator</mainClass>
+                            <mainClass>controller.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -85,6 +101,15 @@
                 <configuration>
                     <source>14</source>
                     <target>14</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>7.0.4</version>
+                <configuration>
+                    <url>jdbc:h2:file:./noteBase</url>
+                    <user>sa</user>
                 </configuration>
             </plugin>
         </plugins>

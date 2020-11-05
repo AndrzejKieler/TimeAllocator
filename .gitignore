@@ -26,3 +26,6 @@ target/
 #  dist/
 #  nbdist/
 #  .nb-gradle/
+/noteBase.mv.db
+/noteBase.trace.db
+/.idea/dataSources/b3d70698-9867-44a0-9e30-5cadc04e5638/storage_v2/_src_/database/NOTEBASE.w13qjA.meta
