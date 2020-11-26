@@ -1,13 +1,13 @@
 package domain.notes;
 
 
+import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import domain.notes.noteEnums.ActTimeType;
 import domain.notes.noteEnums.Label;
 import domain.notes.noteEnums.Owner;
 import org.hibernate.annotations.GenericGenerator;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;

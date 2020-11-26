@@ -12,7 +12,7 @@ public class TodoTodayService {
     public static TodoTodayService todoTodayService = new TodoTodayService();
 
     private NoteRepository noteRepository;
-
+/*
     public TodoTodayService() {
         this(new NoteRepository());
     }
@@ -30,5 +30,5 @@ public class TodoTodayService {
                 .stream()
                 .map(NoteDTO::new)
                 .collect(toList());
-    }
+    }*/
 }

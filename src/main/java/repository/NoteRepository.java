@@ -28,7 +28,7 @@ public class NoteRepository {
             this.notes.add(note);
         }
     }
-
+/*
     public Optional<Note> findById(Long id){
         var session = HibernateUtil.getSessionFactory().openSession();
         var transaction = session.beginTransaction();
@@ -72,7 +72,7 @@ public class NoteRepository {
         List<Note> notes = new ArrayList<Note>();
         /* TODO
         Możliwa zmiana gdy filter będzie działał od strony bazy danych
-         */
+
         notes = noteFilter.getNotes((LinkedList<Note>)this.notes);
         return notes;
     }
@@ -91,7 +91,7 @@ public class NoteRepository {
         Note note;
         note = Note.builder().name("").build();
         /* TODO Parsing Params method
-         */
+
         return note;
     }
 
@@ -99,7 +99,7 @@ public class NoteRepository {
         NoteFilter noteFilter;
         noteFilter = new MainNoteFilter((LinkedList<Note>) notes);
         /* TODO Parsing Params method
-         */
+
         return noteFilter;
-    }
+    }*/
 }

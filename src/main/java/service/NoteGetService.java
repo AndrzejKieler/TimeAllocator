@@ -13,9 +13,9 @@ public class NoteGetService {
     NoteGetService() {
         noteRepository = new NoteRepository();
     }
-
+/*
     public String getById(String id){
         Optional<Note> note = noteRepository.findById(Long.parseLong(id));
         return note.get().getName();
-    }
+    }*/
 }

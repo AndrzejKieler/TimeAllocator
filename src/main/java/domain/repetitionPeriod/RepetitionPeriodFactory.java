@@ -1,5 +1,6 @@
 package domain.repetitionPeriod;
 
+import lombok.var;
 import repository.tools.DateFacade;
 import domain.repetitionPeriod.repetitionPeriodTypeFactory.AnnualPeriodFactory;
 import domain.repetitionPeriod.repetitionPeriodTypeFactory.MonthlyByNumberPeriodFactory;

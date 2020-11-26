@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="Hello", urlPatterns = {"/api"})
 public class TimeAllocatorServlet extends HttpServlet {
     private Logger logger = LoggerFactory.getLogger(TimeAllocatorServlet.class);
-
+/*
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Request got");
@@ -24,5 +23,5 @@ public class TimeAllocatorServlet extends HttpServlet {
             resp.getWriter().write("Teraz "+ name);
         }
         else resp.getWriter().write("Siemson Brdolson!");
-    }
+    }*/
 }

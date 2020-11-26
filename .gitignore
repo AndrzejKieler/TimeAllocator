@@ -1,31 +1,36 @@
+HELP.md
 out/
 target/
 !.mvn/wrapper/maven-wrapper.jar
-
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ##### MAYBE #####
 
-#  ### STS ###
-#  .apt_generated
-#  .classpath
-#  .factorypath
-#  .project
-#  .settings
-#  .springBeans
-#
-#  ### IntelliJ IDEA ###
-#  .idea
-#  *.iws
-#  *.iml
-#  *.ipr
-#
-#  ### NetBeans ###
-#  nbproject/private/
-#  build/
-#  nbbuild/
-#  dist/
-#  nbdist/
-#  .nb-gradle/
+  ### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+  ### IntelliJ IDEA ###
+ .idea
+ *.iws
+ *.iml
+ *.ipr
+
+  ### NetBeans ###
+  nbproject/private/
+  build/
+  nbbuild/
+  dist/
+  nbdist/
+  .nb-gradle/
+  !**/src/main/**/build/
+  !**/src/test/**/build/
 /noteBase.mv.db
 /noteBase.trace.db
 /.idea/dataSources/b3d70698-9867-44a0-9e30-5cadc04e5638/storage_v2/_src_/database/NOTEBASE.w13qjA.meta

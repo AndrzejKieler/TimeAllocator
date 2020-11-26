@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="Todo", urlPatterns = {"/api/todo/*"})
+
 public class TodoServlet extends HttpServlet {
-    private Logger logger = LoggerFactory.getLogger(TimeAllocatorServlet.class);
+   /* private Logger logger = LoggerFactory.getLogger(TimeAllocatorServlet.class);
     private TodoTodayService todoTodayService;
     private ObjectMapper mapper;
 
@@ -41,5 +41,5 @@ public class TodoServlet extends HttpServlet {
         var newNote = mapper.readValue(req.getInputStream(), Note.class);
         mapper.writeValue(resp.getOutputStream(),todoTodayService.addNote(newNote));
 
-    }
+    }*/
 }
