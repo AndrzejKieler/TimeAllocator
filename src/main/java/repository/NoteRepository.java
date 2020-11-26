@@ -6,6 +6,7 @@ import repository.noteBase.noteBaseDownload.noteFilterDecorator.MainNoteFilter;
 import repository.noteBase.noteBaseDownload.noteFilterDecorator.NoteFilter;
 import repository.noteBase.noteBaseUpload.NoteBaseUploader;
 import domain.notes.Note;
+import repository.tools.DateFacade;
 
 import java.util.*;
 
@@ -35,6 +36,31 @@ public class NoteRepository {
         transaction.commit();
         session.close();
         return Optional.ofNullable(result);
+    }
+
+    public List<Note> findTodoToday(){
+        var session = HibernateUtil.getSessionFactory().openSession();
+        var transaction = session.beginTransaction();
+        var result = session.createQuery("from Note where  date =:today", Note.class)
+                .setParameter("today",DateFacade.getInstance().getToday())
+                .list();
+        transaction.commit();
+        session.close();
+        return result;
+    }
+
+    public Note addNote(Note note){
+        var session = HibernateUtil.getSessionFactory().openSession();
+        var transaction = session.beginTransaction();
+
+        if (note.getDate() == null) {
+            note.setDate(DateFacade.getInstance().getToday());
+        }
+
+        session.persist(note);
+        transaction.commit();
+        session.close();
+        return note;
     }
 
     Optional<List<Note>> getNotesFromRepository() {

@@ -25,6 +25,10 @@ public class DateFacade {
         if(dateFacade == null) dateFacade = new DateFacade();
         return dateFacade;
     }
+
+    public Date getToday() {
+        return  Calendar.getInstance(TimeZone.getTimeZone("Poland")).getTime();
+    }
     public byte nullWeekDays(Date date) {
         byte weekDays = (byte) 0b0100_0000;
         calendar.setTime(date);

@@ -19,6 +19,9 @@ public class Task extends Note /*RepetitiveNote*/ {
     @Column
     protected TaskType taskType;
 
+    @Column
+    protected boolean done;
+
     @Override
     public Enum getEnum(){
         return taskType;

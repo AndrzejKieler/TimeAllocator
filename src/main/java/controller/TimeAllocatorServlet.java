@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="Hello", urlPatterns = {"/api/*"})
+@WebServlet(name="Hello", urlPatterns = {"/api"})
 public class TimeAllocatorServlet extends HttpServlet {
     private Logger logger = LoggerFactory.getLogger(TimeAllocatorServlet.class);
 
@@ -21,7 +21,7 @@ public class TimeAllocatorServlet extends HttpServlet {
         String id = req.getParameter("note");
         if (id != null) {
             String name = NoteGetService.noteGetService.getById(id);
-            resp.getWriter().write("Witaj "+ name +"u!");
+            resp.getWriter().write("Teraz "+ name);
         }
         else resp.getWriter().write("Siemson Brdolson!");
     }

@@ -1,6 +1,7 @@
 package controller;
 
 
+import domain.notes.noteEnums.Label;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.plus.webapp.EnvConfiguration;
 import org.eclipse.jetty.plus.webapp.PlusConfiguration;

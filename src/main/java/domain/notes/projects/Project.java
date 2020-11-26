@@ -21,6 +21,9 @@ public class Project extends Note {
    // @OneToMany
   //  protected List<String> simpleTasks;
 
+    @Column
+    protected boolean done;
+
     @OneToMany
     @JoinColumn(name = "noteId")
     protected List<Note> complexTasks;

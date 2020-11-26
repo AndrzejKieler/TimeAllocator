@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>TimeAllocator by Andrzej Kieler</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+</head>
+<body>
+<main style="width: 40%; margin: 0 auto">
+    <div id="welcome" style="text-align: center">
+        <h1>Welcome in ultimate calendar</h1>
+    </div>
+    <form id="getNote" class="pure-form">
+            <input type="text" name="note" class="pure-input-rounded" placeholder="nr wydarzenia"/>
+            <button id="btn" type="submit" class="button-success pure-button" >Search</button>
+            <button id="btn1"  class="button-success pure-button" >Today</button>
+    </form>
+    <form id="todoForm" class="pure-form" style="display: none; text-align: center">
+        <fieldset>
+            <input id="todoText" class="pure-input-rounded pure-input-2-3" placeholder="new TODO">
+            <button id="addTodo" class="pure-button pure-button-primary">+</button>
+        </fieldset>
+        <fieldset id="todo">Loading...</fieldset>
+    </form>
+    <div id="noteName" style="width:40%;margin: 0 auto"></div>
+</main>
+    <script>
+        (function() {
+            const API_URL = 'http://localhost:8080/api';
+            const TODO_API_URL = `${API_URL}/todo`;
+            const todoText = document.getElementById('todoText');
+
+            const form = document.getElementById('getNote');
+            const div = document.getElementById('noteName');
+            /*fetch(TODO_API_URL)
+                .then(processOkResponse)
+                .then(todos => todos.forEach(createNewTodo));
+            */
+            init();
+            function createNewTodo(note) {
+                const label = document.createElement('label');
+                label.classList.add('pure-checkbox');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                //checkbox.checked = note.done;
+                /*checkbox.addEventListener('click',
+                    (event) => {
+                        event.preventDefault();
+                        fetch(`${TODO_API_URL}/${note.id}`, { method: 'PUT' })
+                            .then(processOkResponse)
+                            .then(updatedTodo => checkbox.checked = !!updatedTodo.done)
+                            .catch(console.warn);
+                    });*/
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(` ${note.name}`));
+                document.getElementById('todo').appendChild(label);
+            }
+
+            function init() {
+                document.getElementById('btn').addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const noteObj = {
+                        note: form.elements.note.value
+                    };
+                    fetch(`${API_URL}?${new URLSearchParams(noteObj)}`)
+                        .then((response) => response.text())
+                        .then((text) => {
+                            div.innerHTML = `
+                        <h1>${text}</h1>
+                        `;
+                        });
+                });
+                document.getElementById('btn1').addEventListener('click', (event) => {
+                    event.preventDefault();
+                    form.remove();
+                    displayTodo();
+                    document.getElementById('todoForm').style.display = 'block';
+                });
+                document.getElementById('addTodo').addEventListener('click', (event) => {
+                    event.preventDefault();
+                    fetch(TODO_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name: todoText.value })
+                    })
+                        .then(processOkResponse)
+                        .then(createNewTodo)
+                        .then(() => todoText.value = '')
+                        .catch(console.warn);
+                    //displayTodo();
+                });
+            }
+
+            function displayTodo() {
+                fetch(`${API_URL}/todo`)
+                    .then(response => response.json())
+                    .then((noteArr) => {
+                        const todo = noteArr.map(l => `
+                    <label class="pure-checkbox">
+                        <input type="checkbox" name="todo" value=${l.noteId}>
+                        ${l.name}
+                    </label>
+                    `).join('\n');
+                        document.getElementById('todo').innerHTML = todo;
+                    });
+            }
+
+            function processOkResponse(response = {}) {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error(`Status not 200 (${response.status})`);
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -6,12 +6,14 @@ import lombok.experimental.SuperBuilder;
 import domain.notes.noteEnums.ActTimeType;
 import domain.notes.noteEnums.Label;
 import domain.notes.noteEnums.Owner;
+import org.hibernate.annotations.GenericGenerator;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
@@ -22,7 +24,8 @@ import java.util.Date;
 public class Note implements Comparable, Cloneable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     @Column(name = "noteId", updatable = false, nullable = false)
     protected Long noteId;
 
