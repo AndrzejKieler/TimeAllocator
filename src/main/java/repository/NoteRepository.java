@@ -1,6 +1,9 @@
 package repository;
 
 import controller.HibernateUtil;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 import repository.noteBase.noteBaseDownload.NoteBaseDownloader;
 import repository.noteBase.noteBaseDownload.noteFilterDecorator.MainNoteFilter;
 import repository.noteBase.noteBaseDownload.noteFilterDecorator.NoteFilter;
@@ -10,44 +13,16 @@ import repository.tools.DateFacade;
 
 import java.util.*;
 
-public class NoteRepository {
-    private List<Note> notes;
-    private NoteBaseDownloader noteBaseDownloader;
-    private NoteBaseUploader noteBaseUploader;
-    private NoteFilter noteFilter;
+@Repository
+//@RepositoryRestResource
+public interface NoteRepository extends JpaRepository<Note, Long> {
 
-    public NoteRepository() {
-        notes = new LinkedList<Note>();
-    }
-    NoteRepository(List<Note> notes) {
-        this.notes = notes ;
-    }
-    NoteRepository(Note... notes) {
-       this.notes = new ArrayList<Note>();
-        for (Note note : notes) {
-            this.notes.add(note);
-        }
-    }
-/*
-    public Optional<Note> findById(Long id){
-        var session = HibernateUtil.getSessionFactory().openSession();
-        var transaction = session.beginTransaction();
-        var result = session.get(Note.class, id);
-        transaction.commit();
-        session.close();
-        return Optional.ofNullable(result);
-    }
+    List<Note> findByNoteId(Long id);
 
-    public List<Note> findTodoToday(){
-        var session = HibernateUtil.getSessionFactory().openSession();
-        var transaction = session.beginTransaction();
-        var result = session.createQuery("from Note where  date =:today", Note.class)
-                .setParameter("today",DateFacade.getInstance().getToday())
-                .list();
-        transaction.commit();
-        session.close();
-        return result;
-    }
+    List<Note> findByDate(Date date);
+
+    /*
+
 
     public Note addNote(Note note){
         var session = HibernateUtil.getSessionFactory().openSession();
@@ -61,11 +36,6 @@ public class NoteRepository {
         transaction.commit();
         session.close();
         return note;
-    }
-
-    Optional<List<Note>> getNotesFromRepository() {
-        Optional<List<Note>> notes = Optional.ofNullable(this.notes);
-        return notes;
     }
 
     public List<Note> filterNotes() {
