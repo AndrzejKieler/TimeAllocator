@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="noteBase">
+<dataSource name="note-db">
   <database-model serializer="dbm" dbms="H2" family-id="H2" format-version="4.19">
     <root id="1">
       <ServerVersion>1.4.200</ServerVersion>
